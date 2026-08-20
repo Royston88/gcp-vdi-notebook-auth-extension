@@ -73,9 +73,9 @@ stateDiagram-v2
     Unauthenticated --> FetchingToken : Extension Intercepts
     FetchingToken --> InjectingHeader : Call Native Messaging Host
     InjectingHeader --> SessionEstablished : Send Request + Bearer Token
-    Note over SessionEstablished: Server responds with Set-Cookie
+    note right of SessionEstablished : Server responds with Set-Cookie
     SessionEstablished --> UsingCookies : Subsequent Requests (Lab Usage)
-    Note over UsingCookies: Browser automatically sends cookie.<br/>Native Host is idle/terminated.
+    note right of UsingCookies : Browser automatically sends cookie. Native Host is idle.
     UsingCookies --> SessionExpired : Cookie Expires (~1 Hour)
     SessionExpired --> FetchingToken : Extension Intercepts 401/Redirect
 ```
