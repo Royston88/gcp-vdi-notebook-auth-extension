@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Workbench Token Helper Extension",
+  "version": "1.0",
+  "description": "Intercepts requests to Google Cloud Workbench and adds auth headers.",
+  "permissions": [
+    "declarativeNetRequest",
+    "declarativeNetRequestFeedback",
+    "nativeMessaging",
+    "alarms",
+    "webNavigation"
+  ],
+  "host_permissions": [
+    "*://*.googleusercontent.com/*",
+    "*://*.cloud.google.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.notebooks.googleusercontent.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApgQ2msFW6UPP4qeyQBPampQcgW54StCO4U+7kG7c4/UgUb+EUJGYyw0khRduT7Uw09A99QUPXZ3+EuXdO/eVLP8tY2yoGu1cp6keimxDq9EffwB2OhtbLNP5advop6ZAX7r0PqjolR+ZgbdLEfGfqtYcUffmlbDz/QTOaX1zHNNWomoxYtpX1oZj7ps91c3U52j3vVH9DLj1RynuwW6cKlWznutC7SL4vYQsfeNoMfwSkCdNp95AEIRmg4LQG+xiHmJly36ZcYD4dBknwwU6qdv4M8BqrYLMe2SFGNu5Q5cN2rnF/G3DeNo7GbbmSGCxZNSJM2KmAUSQ/D04oxXy7QIDAQAB"
+}

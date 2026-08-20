@@ -1,0 +1,9 @@
+{
+  "name": "com.google.workbench.token_helper",
+  "description": "GCP Connection Token Helper Native Host",
+  "path": "token_helper.bat",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://ibjloicofmomodambndmdpincachgddd/"
+  ]
+}
