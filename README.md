@@ -98,6 +98,8 @@ gcloud auth login --no-launch-browser
 ```
 Follow the instructions to authenticate using your Google identity (e.g., `user@example.com`) and cache the credentials locally.
 
+![GCloud Authentication](videos/gcloud%20auth%20login%20--no-launch-browser.gif)
+
 ### Step 2: Extract and Run the Installer (Admin Required)
 1.  Extract `extension-installer.zip` (e.g., to `C:\Users\<username>\extension-installer`).
 2.  Open **PowerShell as Administrator** and navigate to the extracted folder:
@@ -109,6 +111,8 @@ Follow the instructions to authenticate using your Google identity (e.g., `user@
     Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
     .\install.ps1
     ```
+
+![Installation and Activation](videos/install%20script%20and%20extension%20activation.gif)
 
 This script will:
 *   Copy the native host scripts to `C:\Program Files\Google\AuthenticationExtension\`.
@@ -126,6 +130,8 @@ This script will:
 
 ### Step 4: Access your Notebook
 Navigate directly to your Vertex AI Workbench notebook URL (e.g., `https://<notebook-id>-dot-us-central1.notebooks.googleusercontent.com`). The extension will automatically authenticate your session.
+
+![Verification and Usage](videos/test%20jyupter%20notebook.gif)
 
 ---
 
