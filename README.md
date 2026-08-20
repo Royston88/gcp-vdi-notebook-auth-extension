@@ -23,6 +23,59 @@ The extension retrieves short-lived OAuth access tokens dynamically from the loc
 
 ---
 
+## Setup & Deployment Guide
+
+This is a simplified, user-local deployment workflow for existing (mature) Windows VDI VMs.
+
+### Prerequisites
+*   You have downloaded the `extension-installer.zip` package to your VM.
+*   Google Cloud SDK (gcloud) is installed on the VM.
+*   Microsoft Edge (or Google Chrome) is installed.
+
+### Step 1: Authenticate with GCloud
+Open a Command Prompt or PowerShell and login:
+```powershell
+gcloud auth login --no-launch-browser
+```
+Follow the instructions to authenticate using your Google identity (e.g., `user@example.com`) and cache the credentials locally.
+
+![GCloud Authentication](videos/gcloud_auth_login_no_launch_browser.gif)
+
+### Step 2: Extract and Run the Installer (Admin Required)
+1.  Extract `extension-installer.zip` (e.g., to `C:\Users\<username>\extension-installer`).
+2.  Open **PowerShell as Administrator** and navigate to the extracted folder:
+    ```powershell
+    cd C:\Users\<username>\extension-installer\extension-installer
+    ```
+3.  Run the installer:
+    ```powershell
+    Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+    .\install.ps1
+    ```
+
+![Installation and Activation](videos/install_script_and_extension_activation.gif)
+
+This script will:
+*   Copy the native host scripts to `C:\Program Files\Google\AuthenticationExtension\`.
+*   Copy the browser extension to `C:\Program Files\Google\AuthenticationExtension\extension\`.
+*   Register the native host in the Windows Registry under `HKEY_LOCAL_MACHINE` (for both Chrome and Edge, including 32-bit redirection paths).
+
+### Step 3: Load the Extension in the Browser
+1.  Open **Microsoft Edge** (or Chrome).
+2.  Navigate to **`edge://extensions/`** (or `chrome://extensions/`).
+3.  Toggle **ON** **Developer mode** (usually in the bottom-left or top-right).
+4.  Click **Load unpacked**.
+5.  Select the folder:
+    `C:\Program Files\Google\AuthenticationExtension\extension`
+6.  Verify that the extension **"Workbench Token Helper Extension"** appears with ID: `ibjloicofmomodambndmdpincachgddd`.
+
+### Step 4: Access your Notebook
+Navigate directly to your Vertex AI Workbench notebook URL (e.g., `https://<notebook-id>-dot-us-central1.notebooks.googleusercontent.com`). The extension will automatically authenticate your session.
+
+![Verification and Usage](videos/test_jupyter_notebook.gif)
+
+---
+
 ## How It Works
 
 ### High-Level Architecture
@@ -79,59 +132,6 @@ stateDiagram-v2
     UsingCookies --> SessionExpired : Cookie Expires (~1 Hour)
     SessionExpired --> FetchingToken : Extension Intercepts 401/Redirect
 ```
-
----
-
-## Setup & Deployment Guide
-
-This is a simplified, user-local deployment workflow for existing (mature) Windows VDI VMs.
-
-### Prerequisites
-*   You have downloaded the `extension-installer.zip` package to your VM.
-*   Google Cloud SDK (gcloud) is installed on the VM.
-*   Microsoft Edge (or Google Chrome) is installed.
-
-### Step 1: Authenticate with GCloud
-Open a Command Prompt or PowerShell and login:
-```powershell
-gcloud auth login --no-launch-browser
-```
-Follow the instructions to authenticate using your Google identity (e.g., `user@example.com`) and cache the credentials locally.
-
-![GCloud Authentication](videos/gcloud%20auth%20login%20--no-launch-browser.gif)
-
-### Step 2: Extract and Run the Installer (Admin Required)
-1.  Extract `extension-installer.zip` (e.g., to `C:\Users\<username>\extension-installer`).
-2.  Open **PowerShell as Administrator** and navigate to the extracted folder:
-    ```powershell
-    cd C:\Users\<username>\extension-installer\extension-installer
-    ```
-3.  Run the installer:
-    ```powershell
-    Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-    .\install.ps1
-    ```
-
-![Installation and Activation](videos/install%20script%20and%20extension%20activation.gif)
-
-This script will:
-*   Copy the native host scripts to `C:\Program Files\Google\AuthenticationExtension\`.
-*   Copy the browser extension to `C:\Program Files\Google\AuthenticationExtension\extension\`.
-*   Register the native host in the Windows Registry under `HKEY_LOCAL_MACHINE` (for both Chrome and Edge, including 32-bit redirection paths).
-
-### Step 3: Load the Extension in the Browser
-1.  Open **Microsoft Edge** (or Chrome).
-2.  Navigate to **`edge://extensions/`** (or `chrome://extensions/`).
-3.  Toggle **ON** **Developer mode** (usually in the bottom-left or top-right).
-4.  Click **Load unpacked**.
-5.  Select the folder:
-    `C:\Program Files\Google\AuthenticationExtension\extension`
-6.  Verify that the extension **"Workbench Token Helper Extension"** appears with ID: `ibjloicofmomodambndmdpincachgddd`.
-
-### Step 4: Access your Notebook
-Navigate directly to your Vertex AI Workbench notebook URL (e.g., `https://<notebook-id>-dot-us-central1.notebooks.googleusercontent.com`). The extension will automatically authenticate your session.
-
-![Verification and Usage](videos/test%20jyupter%20notebook.gif)
 
 ---
 
