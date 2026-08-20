@@ -137,7 +137,7 @@ Chrome native messaging requires matching the extension's ID in the host's `allo
 If you need to regenerate keys or calculate a new ID:
 1.  Run the helper script:
     ```bash
-    python3 scratch/calculate_extension_id.py
+    python3 id-creator/calculate_extension_id.py
     ```
     This generates `key.pem`, calculates the ID, and automatically injects the public key into `src/extension/manifest.json` and updates the host manifest.
 
